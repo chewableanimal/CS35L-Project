@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { keyframes, styled } from "styled-components";
 const PriceContainer = styled.div`
   width: fit-content;

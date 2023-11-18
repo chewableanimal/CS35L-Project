@@ -1,5 +1,5 @@
 "use client";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { fetchCoins } from "../api";
 import { CoinPrice } from "./[coinId]/page";

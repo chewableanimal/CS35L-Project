@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Coin from "./coin";
 

@@ -8,7 +8,7 @@ import { Persona, Form, FormLayout, Field, SubmitButton } from "@saas-ui/react";
 // Custom Hooks ;
 import usePasswordMatch from "../../../../static/hooks/pwd";
 
-export default function setting() {
+export default function Setting() {
   const {
     password,
     confirmPassword,

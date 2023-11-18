@@ -147,7 +147,7 @@ function SignUp() {
           </VStack>
         </FormControl>
         <Text>
-          Don't have an account?{""}
+          Do not have an account?{""}
           <Link href="/Auth/SignUp" color="pink.300">
             {" "}
             Create one.

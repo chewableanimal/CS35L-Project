@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import ApexChart from "react-apexcharts";
 import { styled } from "styled-components";
 import axios from "axios";
@@ -64,7 +64,7 @@ export default function Chart({ params }) {
 
   return (
     <ChartContainer>
-      {isClient && (
+      {isClient && typeof window !== "undefined" && (
         <div>
           {isLoading ? (
             "Loading Chart..."

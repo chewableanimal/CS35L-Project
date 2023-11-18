@@ -1,7 +1,7 @@
 "use client";
 import { fetchCoins } from "@/app/api";
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { styled, keyframes } from "styled-components";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Link from "next/link";
