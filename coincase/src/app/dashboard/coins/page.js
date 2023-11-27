@@ -52,7 +52,7 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-export default function CoinList({ isLoggedIn }) {
+export default function CoinList({ isLoggedIn, type }) {
   let data = coinName;
   const { isLoading, data: datafetched } = useQuery("allCoins", fetchCoins);
 
@@ -102,7 +102,11 @@ export default function CoinList({ isLoggedIn }) {
 
             {isLoggedIn ? (
               <Button style={{ backgroundColor: "gray" }}>
-                <Link href={`/dashboard/coins/${item.id}`}>Buy</Link>
+                {type == "detail" ? (
+                  <Link href={`/dashboard/coins/${item.id}`}>Detail</Link>
+                ) : (
+                  <Link href={`/dashboard/trade/${item.id}`}>Trade</Link>
+                )}
               </Button>
             ) : null}
           </Row>

@@ -10,7 +10,7 @@ export default function home() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <CoinList isLoggedIn={true} />
+      <CoinList isLoggedIn={true} type={"detail"} />
     </QueryClientProvider>
   );
 }

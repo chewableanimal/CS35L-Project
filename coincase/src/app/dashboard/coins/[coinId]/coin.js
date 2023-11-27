@@ -10,6 +10,8 @@ import Chart from "./chart";
 import Price from "./price";
 import { coinPrices } from "../../../../../static/coinPrices";
 import { coinName } from "../../../../../static/coinName";
+import Balance from "../../home/balance";
+import Trade from "../../trade/[coinId]/trade";
 
 export const StyledLink = styled(Link)`
   display: flex;
@@ -154,7 +156,7 @@ const LinkTitle = styled(StyledLink)`
 `;
 const BASE_URL = "https://api.coinpaprika.com/v1";
 
-export default function Coin({ params }) {
+export default function Coin({ params, type }) {
   const coinId = params.coinId;
   const fetchCoinTickers = async () => {
     return await axios
@@ -189,43 +191,52 @@ export default function Coin({ params }) {
         <Title>{tickersLoading ? "Loading..." : tickersData?.name}</Title>
       </TitleContainer>
       <ContentWrapper>
-        <PriceAndChart>
+        <PriceAndChart
+          style={type == "trade" ? { flexDirection: "column" } : null}
+        >
           <QueryProvider>
             <Chart params={params} />
             <Price params={params} />
+            {type == "trade" ? (
+              <Trade coin={data} type={"buy"} rank={coinWithId - 1} />
+            ) : null}
           </QueryProvider>
         </PriceAndChart>
-        <OverViewBox>
-          <OverView>
-            <OverViewItem>
-              <span>Name: </span>
-              <span>{tickersData?.name}</span>
-            </OverViewItem>
-            <OverViewItem>
-              <span>Symbol: </span>
-              <span>{tickersData?.symbol}</span>
-            </OverViewItem>
-            <OverViewItem>
-              <span>Rank: </span>
-              <span>{tickersData?.rank}</span>
-            </OverViewItem>
-          </OverView>
-          <Description>{coinName[coinWithId - 1].description}</Description>
-          <OverView>
-            <OverViewItem>
-              <span>Total Supply: </span>
-              <span>{tickersData?.total_supply}</span>
-            </OverViewItem>
-            <OverViewItem>
-              <span>Max Supply: </span>
-              <span>
-                {tickersData?.max_supply == 0
-                  ? tickersData?.total_supply
-                  : tickersData?.max_supply}
-              </span>
-            </OverViewItem>
-          </OverView>
-        </OverViewBox>
+        {type == "trade" ? null : (
+          <OverViewBox>
+            <OverView>
+              <OverViewItem>
+                <span>Name: </span>
+                <span>{tickersData?.name}</span>
+              </OverViewItem>
+              <OverViewItem>
+                <span>Symbol: </span>
+                <span>{tickersData?.symbol}</span>
+              </OverViewItem>
+              <OverViewItem>
+                <span>Rank: </span>
+                <span>{tickersData?.rank}</span>
+              </OverViewItem>
+            </OverView>
+
+            <Description>{coinName[coinWithId - 1].description}</Description>
+
+            <OverView>
+              <OverViewItem>
+                <span>Total Supply: </span>
+                <span>{tickersData?.total_supply}</span>
+              </OverViewItem>
+              <OverViewItem>
+                <span>Max Supply: </span>
+                <span>
+                  {tickersData?.max_supply == 0
+                    ? tickersData?.total_supply
+                    : tickersData?.max_supply}
+                </span>
+              </OverViewItem>
+            </OverView>
+          </OverViewBox>
+        )}
       </ContentWrapper>
     </CoinWrapper>
   );

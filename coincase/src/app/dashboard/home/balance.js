@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { db } from "@/app/firebase";
 import { doc, getDoc } from "firebase/firestore";
 
-export default function Balance({ user, data }) {
+export default function Balance({ user, data, type }) {
   const { authUser } = useAuth();
 
   const [pageState, setPageState] = useState({
@@ -46,10 +46,15 @@ export default function Balance({ user, data }) {
 
   //const updatedUser = { ...user, balance: gain };
   const gain = (100000 - pageState.balance) / pageState.balance; // compare to the money that the user initially had
-  return (
+  const currentCash = pageState.balance;
+  return type === "balanceValue" ? (
+    // If type is "balance", render the balance
+    { currentCash }
+  ) : (
+    // If type is not "balance", render a greeting and balance information
     <div>
-      Hi {pageState.firstName}! your current balance is ${pageState.balance},
-      having __gain__ percentages
+      Hi {pageState.firstName}! Your current balance is ${pageState.balance},
+      having __gain__ percentages.
     </div>
   );
 }
